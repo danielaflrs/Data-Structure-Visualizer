@@ -1,0 +1,17 @@
+package mx.unam.ciencias.edd.proyecto2;
+import mx.unam.ciencias.edd.ArbolBinario;
+
+public class GraficadorArbolBinario {
+    
+    String init = "<?xml version='1.0' encoding='UTF-8' ?>\n";
+
+    String dimensiones = "<svg width='%s' height='%s'>\n";
+
+    String g1 = "  <g>\n";
+
+    String g2 = "  </g>\n";
+
+    String cierra = "</svg>";
+
+    String line = "    x1='100' y1='40' x2='40' y2='160' stroke='black' stroke-width='2'  />\n";
+}

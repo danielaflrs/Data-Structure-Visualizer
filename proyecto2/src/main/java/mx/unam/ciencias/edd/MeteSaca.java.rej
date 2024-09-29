@@ -1,0 +1,76 @@
+--- src/main/java/mx/unam/ciencias/edd/MeteSaca.java
++++ src/main/java/mx/unam/ciencias/edd/MeteSaca.java
+@@ -17,12 +17,14 @@ public abstract class MeteSaca<T> {
+         /** El siguiente nodo. */
+         public Nodo siguiente;
+ 
+-        /**
++        /** 
+          * Construye un nodo con un elemento.
+          * @param elemento el elemento del nodo.
+          */
+         public Nodo(T elemento) {
+             // Aquí va su código.
++	    siguiente = null;
++	    this.elemento = elemento;
+         }
+     }
+ 
+@@ -43,7 +45,19 @@ public abstract class MeteSaca<T> {
+      * @throws NoSuchElementException si la estructura está vacía.
+      */
+     public T saca() {
+-        // Aquí va su código.
++	if(cabeza == null){
++	    throw new NoSuchElementException("No hay elementos");
++	}
++	Nodo cabecita = cabeza;
++	if(cabeza == rabo){
++	    rabo = null;
++	    cabeza = null;
++	}
++	else{
++	    cabeza = cabeza.siguiente;
++	}
++	return cabecita.elemento; 
++	
+     }
+ 
+     /**
+@@ -54,6 +68,11 @@ public abstract class MeteSaca<T> {
+      */
+     public T mira() {
+         // Aquí va su código.
++	if(cabeza == null){
++	    throw new NoSuchElementException("No hay elementos");
++	}
++	return cabeza.elemento;
++	
+     }
+ 
+     /**
+@@ -63,6 +82,7 @@ public abstract class MeteSaca<T> {
+      */
+     public boolean esVacia() {
+         // Aquí va su código.
++	return cabeza == null;
+     }
+ 
+     /**
+@@ -77,5 +97,16 @@ public abstract class MeteSaca<T> {
+             return false;
+         @SuppressWarnings("unchecked") MeteSaca<T> m = (MeteSaca<T>)object;
+         // Aquí va su código.
++	Nodo nodito = m.cabeza;
++	Nodo nodote = this.cabeza;
++
++	while(nodito != null && nodote != null){
++	    if(!nodito.elemento.equals(nodote.elemento)){
++		return false;
++	    }
++	    nodito = nodito.siguiente;
++	    nodote = nodote.siguiente;
++	}
++	return nodito == null && nodote == null;
+     }
+ }

@@ -1,0 +1,54 @@
+package mx.unam.ciencias.edd.proyecto2;
+
+import mx.unam.ciencias.edd.Cola;
+
+public class GraficadorCola {
+
+    Cola<Integer> cola;
+
+    String init = "<?xml version='1.0' encoding='UTF-8' ?>\n";
+
+    String dimensiones = "<svg width='%s' height='%s'>\n";
+
+    String g1 = "  <g>\n";
+
+    String g2 = "  </g>\n";
+
+    String cierra = "</svg>";
+
+    String line = "    <line x1='%s' y1='45' x2='%s' y2='45' stroke='black' stroke-width='2' />\n";
+
+    String rect = "    <rect x='%s' y='20' width='50' height='50' stroke='black' stroke-width='2' fill='white' />\n";
+
+    String text = "    <text fill='black' font-family='sans-serif' font-size='20' x='%s' y='55' text-anchor='middle'>%s</text>\n";
+
+    public GraficadorLista(Lista<Integer> lista) {
+	this.lista = lista;
+    }
+
+    public String dibuja(){
+	int h = 100;
+	int xr = 50;
+	int x1 = 100, x2 = 150;
+	int num = lista.getPrimero(), xn = 75;
+	int w = 100*lista.getLongitud();
+	String svg = init;
+	svg += String.format(dimensiones, w, h);	
+	svg += this.g1;
+	for (Integer i : this.lista) {
+	    //svg += String.format("el elemento es: %d y ya\n", i);
+	    num = i;
+	    svg += String.format(line, x1, x2);
+	    svg += String.format(rect, xr);
+	    svg += String.format(text, xn, num);
+	    xr += 100;
+	    x1 += 100;
+	    x2 += 100;
+	    xn += 100;
+	}
+	// dibujar los vertices
+	return svg + g2 + cierra;
+    }
+
+    
+}

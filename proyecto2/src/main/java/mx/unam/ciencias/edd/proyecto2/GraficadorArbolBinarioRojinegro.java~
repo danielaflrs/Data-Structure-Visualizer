@@ -1,0 +1,66 @@
+package mx.unam.ciencias.edd.proyecto2;
+import mx.unam.ciencias.edd.ArbolBinarioComplet;
+import mx.unam.ciencias.edd.VerticeArbolBinario;
+
+public class GraficadorArbolBinarioRojinegro {
+
+    ArbolBinarioRojinegro<Integer> arbolBinarioCompleto;
+    
+    String init = "<?xml version='1.0' encoding='UTF-8' ?>\n";
+
+    String dimensiones = "<svg width='%s' height='%s'>\n";
+
+    String g1 = "  <g>\n";
+
+    String g2 = "  </g>\n";
+
+    String cierra = "</svg>";
+
+    String line = "    <line  x1='%s' y1='%s' x2='%s' y2='%s' stroke='black' stroke-width='2'  />\n";
+
+    String circ = "    <circle cx='%s' cy='%s' r='20' stroke='black' stroke-width='1.5' fill='white'  />\n";
+
+    String text = "    <text fill='black' font-family='sans-serif' font-size='20' x='%s' y='%s' text-anchor='middle'>%s</text> />\n";
+
+    public GraficadorArbolBinarioRojinegro(ArbolBinarioRojinegro<Integer> arbolBinarioRojinegro) {
+	this.arbolBinarioRojinegro = arbolBinarioRojinegro;
+    }
+
+    public String dibuja(){
+	//int w = (int) (40*(Math.pow(2, arbolBinarioRojinegro.altura() - 1)));
+	int w = arbolBinarioRojinegro.getElementos() * 100;
+	int h = (arbolBinarioRojinegro.altura() * 40) + ((arbolBinarioRojinegro.altura() - 1)* 120);
+	int x1, x2;
+	int y1, y2;
+	double cx = w/2, cy = 40;
+	int num;
+	int xn, yn;
+
+	String svg = init;
+	svg += String.format(dimensiones, w, h);
+	svg += this.g1;
+
+	//svg += String.format(circ, cx, cy);
+
+	String s = dibuja(arbolBinarioRojinegro.raiz(), 0, 0, w/2);
+	
+	return svg + s + g2 + cierra;
+	
+    }
+
+    private String dibuja(VerticeArbolBinario vertice, int a, int y, int w){
+	String s = String.format(circ, w, y+20);
+	int xn = w, yn = y;
+	s += String.format(text, xn, yn, vertice.get());
+	if(vertice.hayIzquierdo()){
+	    s += dibuja(vertice.izquierdo(), a, y+40, w - (w-a)/2);
+	    s += String.format(line, w, y + 20, w - (w-a)/2, y+40);
+	}
+	if(vertice.hayDerecho()){
+	    s += dibuja(vertice.derecho(), w, y+40, w+(w-a)/2);
+	    s += String.format(line, w, y + 20, w +(w-a)/2, y+40);
+	}
+	
+	return s;
+    }
+}

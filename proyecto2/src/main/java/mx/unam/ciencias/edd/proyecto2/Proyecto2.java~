@@ -1,0 +1,91 @@
+package mx.unam.ciencias.edd.proyecto2;
+
+import mx.unam.ciencias.edd.Lista;
+import mx.unam.ciencias.edd.ArbolAVL;
+import mx.unam.ciencias.edd.ArbolBinario;
+import mx.unam.ciencias.edd.ArbolBinarioCompleto;
+import mx.unam.ciencias.edd.ArbolBinarioOrdenado;
+import mx.unam.ciencias.edd.ArbolRojinegro;
+import mx.unam.ciencias.edd.Cola;
+import mx.unam.ciencias.edd.Pila;
+import java.text.Normalizer;
+import java.io.IOException;
+import java.io.*;
+
+public class Proyecto2 {
+    public static void main(String[] args) {    
+	Lector lectorDeArchivos = new Lector();
+	
+	Lista<String> listaA = lectorDeArchivos.lector(args[0]);
+	Lista<Integer> listaB = new Lista<Integer>();
+	
+	String primElem = listaA.eliminaPrimero();
+	listaB = separador(listaA);
+	String lista = "Lista";
+	String arbolAVL = "ArbolAVL";
+	String arbolBinarioOrdenado = "ArbolBinarioOrdenado";
+	String arbolBinarioCompleto = "ArbolBinarioCompleto";
+	String arbolRojinegro = "ArbolRojinegro";
+	String cola = "Cola";
+	String pila = "Pila";
+
+	if(primElem.equalsIgnoreCase(lista)){
+	    Lista<Integer> lista1 = listaB;
+	    //System.out.println(lista1);
+	    //System.out.println(lista);
+	    GraficadorLista gl = new GraficadorLista(listaB);
+	    System.out.println(gl.dibuja());
+	}
+	else if(primElem.equalsIgnoreCase(arbolAVL)){
+	    ArbolAVL<Integer> tipoArbolAVL = new ArbolAVL<Integer>(listaB);
+	    System.out.println(tipoArbolAVL);
+	    System.out.println(arbolAVL);
+	}
+	else if(primElem.equalsIgnoreCase(arbolBinarioOrdenado)){
+	    ArbolBinarioOrdenado<Integer> tipoArbolBinarioOrdenado = new ArbolBinarioOrdenado<Integer>(listaB);
+	    System.out.println(tipoArbolBinarioOrdenado);
+	    System.out.println(arbolBinarioOrdenado);
+	}
+	else if(primElem.equalsIgnoreCase(arbolBinarioCompleto)){
+	    ArbolBinarioCompleto<Integer> tipoArbolBinarioCompleto = new ArbolBinarioCompleto<Integer>(listaB);
+	    System.out.println(tipoArbolBinarioCompleto);
+	    System.out.println(arbolBinarioCompleto);
+	}
+	else if(primElem.equalsIgnoreCase(arbolRojinegro)){
+	    ArbolRojinegro<Integer> tipoArbolRojinegro = new ArbolRojinegro<Integer>(listaB);
+	    System.out.println(tipoArbolRojinegro);
+	    System.out.println(arbolRojinegro);
+	}
+	else if(primElem.equalsIgnoreCase(cola)){
+	    Cola<Integer> tipoCola = new Cola<Integer>();
+	    for(int i : listaB)
+		tipoCola.mete(i);
+	    System.out.println(tipoCola);
+	    System.out.println(cola);
+	}
+	else if(primElem.equalsIgnoreCase(pila)){
+	    Pila<Integer> tipoPila = new Pila<Integer>();
+	    for(int i : listaB)
+		tipoPila.mete(i);
+	    System.out.println(tipoPila);
+	    System.out.println(pila);
+	}		    
+    }
+    private static Lista<Integer> separador (Lista<String> listaElementos){
+	Lista<Integer> nuevaLista = new Lista<Integer>();
+	for(String i: listaElementos) {
+	    String[] elementos = i.split(" ");
+	    for(int j = 0; j < elementos.length; j++){
+		try {
+		    int a = Integer.parseInt(elementos[j]);
+		    nuevaLista.agrega(a);
+		}
+		catch (NumberFormatException e){
+		    System.out.println("Esto no es un entero");
+		    System.exit(-1);
+		}
+	    }
+	}
+	return nuevaLista;
+    }
+}
