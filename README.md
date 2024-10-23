@@ -8,7 +8,7 @@ The program reads a file that describes the data structure and generates an SVG 
 
 ## Features
 
-- **Supported Data Structures**: Includes Stacks, Queues, Binary Trees, Red-Black Trees, and Graphs.
+- **Supported Data Structures**: Includes LinkedLists, Stacks, Queues, Binary Trees and Red-Black Trees.
 - **Custom SVG Output**: Generates visually appealing SVG files for each data structure.
 - **Easy Input Format**: Input files use a simple format that allows for easy customization of structures and elements.
 - **Modular and Scalable**: The project is designed to support additional data structures with ease.
