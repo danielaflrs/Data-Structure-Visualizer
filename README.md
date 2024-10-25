@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Data Structures Visualizer** is a tool designed to visually represent various data structures such as stacks, queues, binary trees, and graphs using SVG graphics. This project helps users understand the structure and behavior of these data types through graphical representation.
+**Data Structures Visualizer** is a tool designed to visually represent various data structures such as linked lists, stacks, queues and binary trees using SVG graphics. This project helps users understand the structure and behavior of these data types through graphical representation.
 
 The program reads a file that describes the data structure and generates an SVG image representing it. Supported structures include Stacks, Queues, Red-Black Trees, and more.
 
